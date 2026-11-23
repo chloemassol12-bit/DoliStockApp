@@ -23,6 +23,8 @@
 
 ## Interface responsive
 
+- Après « Enregistrer sur l’appareil », la file affiche sous chaque liste ses références et leurs quantités. La désignation accompagne les références connues, y compris lors de la consultation hors ligne.
+
 - Dans « Listes », cocher une seule liste puis « Modifier la liste sélectionnée » pour retrouver son entrepôt, son libellé, son mode et ses articles. « Enregistrer les modifications » revient à la file. Pour un envoi ou une suppression, la fenêtre de confirmation récapitule toute la sélection et permet d’annuler.
 
 - Pendant la saisie connectée, la référence et la quantité actualisent un aperçu du stock prévu selon le mode Ajout ou Remplacement. Hors ligne, la référence reste saisissable sans estimation de stock distant.

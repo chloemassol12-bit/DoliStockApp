@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import fr.dolistocks.app.R;
+import fr.dolistocks.app.data.demo.DemoStock;
 import fr.dolistocks.app.data.demo.DemoStock.StockList;
 
 public final class PendingFragment extends WorkflowFragment {
@@ -95,8 +96,7 @@ public final class PendingFragment extends WorkflowFragment {
         }
         for (StockList list : session.queue) {
             CheckBox check = (CheckBox) getLayoutInflater().inflate(R.layout.row_select_list, rows, false);
-            check.setText(list.heading() + "\n" + getResources().getQuantityString(
-                    R.plurals.article_count, list.lines.size(), list.lines.size()));
+            check.setText(listSummary(list));
             check.setChecked(session.selected.contains(list));
             check.setOnCheckedChangeListener((button, selected) -> {
                 if (selected) session.selected.add(list);
@@ -106,6 +106,19 @@ public final class PendingFragment extends WorkflowFragment {
             rows.addView(check);
         }
         updateActions();
+    }
+
+    private String listSummary(StockList list) {
+        StringBuilder summary = new StringBuilder(list.heading()).append('\n')
+                .append(getResources().getQuantityString(R.plurals.article_count,
+                        list.lines.size(), list.lines.size()));
+        for (Map.Entry<String, Integer> line : list.lines.entrySet()) {
+            String reference = line.getKey();
+            String designation = DemoStock.CATALOG.get(reference);
+            String article = designation == null ? reference : reference + " · " + designation;
+            summary.append('\n').append(getString(R.string.line_format, article, line.getValue()));
+        }
+        return summary.toString();
     }
 
     private void updateActions() {
