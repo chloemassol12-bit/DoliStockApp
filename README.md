@@ -23,6 +23,8 @@
 
 ## Interface responsive
 
+- Dans « Listes », cocher une seule liste puis « Modifier la liste sélectionnée » pour retrouver son entrepôt, son libellé, son mode et ses articles. « Enregistrer les modifications » revient à la file. Pour un envoi ou une suppression, la fenêtre de confirmation récapitule toute la sélection et permet d’annuler.
+
 - Pendant la saisie connectée, la référence et la quantité actualisent un aperçu du stock prévu selon le mode Ajout ou Remplacement. Hors ligne, la référence reste saisissable sans estimation de stock distant.
 
 - Les écrans partagent les mêmes repères visuels : action principale pleine, actions secondaires à contour, champs avec bordure de focus et état réseau toujours écrit. La file d’envoi souligne les listes cochées ; les confirmations et résultats regroupent les informations dans des cartes.

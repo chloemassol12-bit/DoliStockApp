@@ -1,0 +1,5 @@
+<resources>
+    <string name="modify_heading">Modifier la liste</string>
+    <string name="modify_articles">Modifier les articles</string>
+    <string name="save_changes">Enregistrer les modifications</string>
+</resources>

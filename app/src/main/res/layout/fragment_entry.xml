@@ -13,6 +13,7 @@
             style="@style/ScreenTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/entry_heading"
             android:text="@string/entry_title" />
         <TextView
             style="@style/LoginLabel"
@@ -70,5 +71,13 @@
             android:minHeight="48dp"
             android:layout_marginTop="14dp"
             android:textAllCaps="false" />
+        <Button
+            style="@style/StockPrimary"
+            android:id="@+id/save_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/save_changes"
+            android:visibility="gone" />
     </LinearLayout>
 </ScrollView>

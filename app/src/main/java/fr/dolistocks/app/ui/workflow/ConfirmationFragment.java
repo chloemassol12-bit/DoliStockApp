@@ -1,72 +1,52 @@
 package fr.dolistocks.app.ui.workflow;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import androidx.fragment.app.DialogFragment;
+import fr.dolistocks.app.MainActivity;
 import fr.dolistocks.app.R;
-import fr.dolistocks.app.data.demo.DemoStock.StockList;
 
-public final class ConfirmationFragment extends WorkflowFragment {
-    public ConfirmationFragment() { super(R.layout.fragment_confirmation); }
+public final class ConfirmationFragment extends DialogFragment {
+    static final String REQUEST = "confirm_selection";
+    static final String DELETE = "delete";
+    private static final String MESSAGE = "message";
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle state) {
-        super.onViewCreated(view, state);
-        LinearLayout rows = view.findViewById(R.id.selected_lists);
-        for (StockList list : session.selected) {
-            TextView item = (TextView) getLayoutInflater().inflate(R.layout.row_stock_summary, rows, false);
-            item.setText(list.heading() + " · " + getString(list.replace ? R.string.mode_replace : R.string.mode_add));
-            rows.addView(item);
-        }
-        view.findViewById(R.id.cancel_send).setOnClickListener(button -> getParentFragmentManager().popBackStack());
-        view.findViewById(R.id.confirm_send).setOnClickListener(button -> {
-            if (!online() || session.selected.isEmpty()) return;
-            button.setEnabled(false);
-            simulateSend();
-            open(ResultFragment.class);
-        });
-        observeNetwork();
+    static ConfirmationFragment create(boolean delete, String message) {
+        Bundle args = new Bundle();
+        args.putBoolean(DELETE, delete);
+        args.putString(MESSAGE, message);
+        ConfirmationFragment dialog = new ConfirmationFragment();
+        dialog.setArguments(args);
+        return dialog;
     }
 
-    /** TODO : remplacer les résultats illustratifs par la réponse du module Dolibarr. */
-    private void simulateSend() {
-        session.results.clear();
-        for (StockList list : session.selected) {
-            Map<String, String> report = new LinkedHashMap<>();
-            Map<String, Integer> levels = session.stockAt(list.warehouse);
-            Iterator<Map.Entry<String, Integer>> lines = list.lines.entrySet().iterator();
-            while (lines.hasNext()) {
-                Map.Entry<String, Integer> line = lines.next();
-                String reference = line.getKey();
-                Integer before = levels.get(reference);
-                if (before == null) {
-                    report.put(reference, getString(R.string.sent_error));
-                    continue;
-                }
-                long after = list.replace ? line.getValue() : (long) before + line.getValue();
-                if (after > Integer.MAX_VALUE) {
-                    report.put(reference, getString(R.string.invalid_qty));
-                    continue;
-                }
-                levels.put(reference, (int) after);
-                report.put(reference, getString(R.string.sent_ok) + "\n"
-                        + getString(R.string.stock_change, before, after));
-                lines.remove();
-            }
-            session.results.put(list, report);
-            if (list.lines.isEmpty()) session.queue.remove(list);
-        }
-        session.selected.clear();
+    @NonNull
+    @Override
+    public Dialog onCreateDialog(@Nullable Bundle state) {
+        Bundle args = requireArguments();
+        boolean delete = args.getBoolean(DELETE);
+        return new AlertDialog.Builder(requireContext())
+                .setTitle(delete ? R.string.delete_lists : R.string.confirm_title)
+                .setMessage(args.getString(MESSAGE))
+                .setNegativeButton(android.R.string.cancel, null)
+                .setPositiveButton(delete ? R.string.remove : R.string.confirm_send,
+                        (dialog, which) -> getParentFragmentManager().setFragmentResult(REQUEST, args))
+                .create();
     }
 
     @Override
-    protected void networkChanged(boolean connected) {
-        requireView().findViewById(R.id.confirm_send).setEnabled(connected && !session.selected.isEmpty());
+    public void onCreate(@Nullable Bundle state) {
+        super.onCreate(state);
+        if (!requireArguments().getBoolean(DELETE)) {
+            ((MainActivity) requireActivity()).connected.observe(this, connected -> {
+                AlertDialog dialog = (AlertDialog) getDialog();
+                if (dialog != null && dialog.getButton(AlertDialog.BUTTON_POSITIVE) != null) {
+                    dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(connected);
+                }
+            });
+        }
     }
 }

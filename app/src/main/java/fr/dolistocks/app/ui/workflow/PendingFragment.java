@@ -1,6 +1,9 @@
 package fr.dolistocks.app.ui.workflow;
 
-import android.app.AlertDialog;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import fr.dolistocks.app.ui.entry.EntryFragment;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
@@ -19,19 +22,67 @@ public final class PendingFragment extends WorkflowFragment {
         super.onViewCreated(view, state);
         view.findViewById(R.id.edit_list).setOnClickListener(button -> {
             session.edit(session.selected.iterator().next());
-            open(ArticlesFragment.class);
+            Bundle args = new Bundle();
+            args.putBoolean(EntryFragment.EDIT_MODE, true);
+            getParentFragmentManager().beginTransaction().setReorderingAllowed(true)
+                    .replace(R.id.page, EntryFragment.class, args).addToBackStack(null).commit();
         });
-        view.findViewById(R.id.delete_lists).setOnClickListener(button ->
-                new AlertDialog.Builder(requireContext()).setMessage(R.string.delete_question)
-                        .setNegativeButton(android.R.string.cancel, null)
-                        .setPositiveButton(R.string.remove, (dialog, which) -> {
-                            session.queue.removeAll(session.selected);
-                            session.selected.clear();
-                            render();
-                        }).show());
-        view.findViewById(R.id.send_lists).setOnClickListener(button -> open(ConfirmationFragment.class));
+        getChildFragmentManager().setFragmentResultListener(ConfirmationFragment.REQUEST,
+                getViewLifecycleOwner(), (key, result) -> {
+                    if (session.selected.isEmpty()) return;
+                    if (result.getBoolean(ConfirmationFragment.DELETE)) {
+                        session.queue.removeAll(session.selected);
+                        session.selected.clear();
+                        render();
+                    } else if (online()) {
+                        simulateSend();
+                        open(ResultFragment.class);
+                    }
+                });
+        view.findViewById(R.id.delete_lists).setOnClickListener(button -> confirm(true));
+        view.findViewById(R.id.send_lists).setOnClickListener(button -> confirm(false));
         render();
         observeNetwork();
+    }
+
+    private void confirm(boolean delete) {
+        if (session.selected.isEmpty() || getChildFragmentManager().findFragmentByTag("confirm") != null) return;
+        StringBuilder message = new StringBuilder(getString(delete ? R.string.delete_question : R.string.confirm_question));
+        for (StockList list : session.selected) {
+            message.append("\n\n").append(list.heading());
+        }
+        ConfirmationFragment.create(delete, message.toString()).show(getChildFragmentManager(), "confirm");
+    }
+
+    /** TODO : remplacer les résultats illustratifs par la réponse du module Dolibarr. */
+    private void simulateSend() {
+        session.results.clear();
+        for (StockList list : session.selected) {
+            Map<String, String> report = new LinkedHashMap<>();
+            Map<String, Integer> levels = session.stockAt(list.warehouse);
+            Iterator<Map.Entry<String, Integer>> lines = list.lines.entrySet().iterator();
+            while (lines.hasNext()) {
+                Map.Entry<String, Integer> line = lines.next();
+                String reference = line.getKey();
+                Integer before = levels.get(reference);
+                if (before == null) {
+                    report.put(reference, getString(R.string.sent_error));
+                    continue;
+                }
+                long after = list.replace ? line.getValue() : (long) before + line.getValue();
+                if (after > Integer.MAX_VALUE) {
+                    report.put(reference, getString(R.string.invalid_qty));
+                    continue;
+                }
+                levels.put(reference, (int) after);
+                report.put(reference, getString(R.string.sent_ok) + "\n"
+                        + getString(R.string.stock_change, before, after));
+                lines.remove();
+            }
+            session.results.put(list, report);
+            if (list.lines.isEmpty()) session.queue.remove(list);
+        }
+        session.selected.clear();
     }
 
     private void render() {
