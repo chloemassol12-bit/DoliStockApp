@@ -1,0 +1,83 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp">
+    <LinearLayout
+        style="@style/FormColumn"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="32dp"
+        android:paddingBottom="24dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ready_title"
+            android:textSize="24sp"
+            android:textColor="#263D42"
+            android:textStyle="bold" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/header_surface">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/ready_complete"
+                android:textSize="16sp"
+                android:textColor="#263D42"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/ready_warehouses"
+                android:textSize="14sp"
+                android:textColor="#263D42"
+                android:layout_marginTop="6dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/header_surface">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/ready_offline"
+                android:textSize="16sp"
+                android:textColor="#263D42"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/ready_validated"
+                android:textSize="14sp"
+                android:textColor="#263D42"
+                android:layout_marginTop="6dp" />
+        </LinearLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/open_home"
+            android:minHeight="48dp"
+            android:layout_marginTop="14dp"
+            android:backgroundTint="@color/accent"
+            android:text="@string/open_home"
+            android:textColor="@android:color/white"
+            android:textAllCaps="false" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ready_last_sync"
+            android:textSize="14sp"
+            android:textColor="#263D42"
+            android:layout_marginTop="14dp" />
+    </LinearLayout>
+</ScrollView>

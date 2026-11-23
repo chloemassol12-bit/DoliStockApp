@@ -1,0 +1,16 @@
+<resources>
+    <string name="entry_title">Nouvelle saisie</string>
+    <string name="entry_warehouse">Entrepôt</string>
+    <string name="entry_label">Libellé</string>
+    <string name="entry_example">Liste 26/08/2026</string>
+    <string name="entry_mode">Mode de mise à jour</string>
+    <string name="entry_add">Ajout</string>
+    <string name="entry_replace">Remplacement</string>
+    <string name="entry_help">Ajout : ajoute la quantité saisie au stock existant. Remplacement : fixe le stock à la quantité saisie.</string>
+    <string name="entry_articles">Ajouter des articles</string>
+    <string name="entry_preview">La saisie des articles sera disponible dans le prochain écran.</string>
+    <string-array name="entry_warehouses">
+        <item>Rodez</item>
+        <item>Entrepôt central</item>
+    </string-array>
+</resources>

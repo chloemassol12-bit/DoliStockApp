@@ -2,7 +2,6 @@ package fr.dolistocks.app.ui.sync;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,6 +20,10 @@ public final class SyncFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         view.findViewById(R.id.sync_now).setOnClickListener(button ->
-                Toast.makeText(requireContext(), R.string.sync_preview, Toast.LENGTH_SHORT).show());
+                getParentFragmentManager().beginTransaction()
+                        .setReorderingAllowed(true)
+                        .replace(R.id.page, ReadyFragment.class, null)
+                        .addToBackStack(null)
+                        .commit());
     }
 }

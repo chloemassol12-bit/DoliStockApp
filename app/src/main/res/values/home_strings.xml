@@ -1,0 +1,13 @@
+<resources>
+    <string name="home_title">Accueil connecté</string>
+    <string name="home">Accueil</string>
+    <string name="lists">Listes</string>
+    <string name="settings">Paramètres</string>
+    <string name="new_list">Nouvelle liste</string>
+    <string name="pending_lists">Listes à envoyer (2)</string>
+    <string name="refresh_warehouses">Synchroniser les entrepôts</string>
+    <string name="recent">Activité récente</string>
+    <string name="recent_list">Liste du 28/06/2026 enregistrée</string>
+    <string name="recent_detail">Aujourd’hui à 15:45 · 3 articles</string>
+    <string name="home_destination_preview">Cet écran reste à intégrer à la maquette.</string>
+</resources>
