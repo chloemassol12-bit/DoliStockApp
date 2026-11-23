@@ -2,7 +2,9 @@ package fr.dolistocks.app.ui.home;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
+import android.widget.TextView;
+import fr.dolistocks.app.ui.workflow.WorkflowFragment;
+import fr.dolistocks.app.ui.workflow.PendingFragment;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,7 +15,7 @@ import fr.dolistocks.app.ui.entry.EntryFragment;
 import fr.dolistocks.app.ui.sync.SyncFragment;
 
 /** Accueil du parcours connecté avec les exemples de listes du prototype. */
-public final class HomeFragment extends Fragment {
+public final class HomeFragment extends WorkflowFragment {
 
     public HomeFragment() {
         super(R.layout.fragment_home);
@@ -28,9 +30,6 @@ public final class HomeFragment extends Fragment {
                         .replace(R.id.page, SyncFragment.class, null)
                         .addToBackStack(null)
                         .commit());
-        // TODO : relier les destinations à leurs fragments à mesure de leur livraison.
-        View.OnClickListener showPreview = button ->
-                Toast.makeText(requireContext(), R.string.home_destination_preview, Toast.LENGTH_SHORT).show();
         view.findViewById(R.id.home).setEnabled(false);
         view.findViewById(R.id.new_list).setOnClickListener(button ->
                 getParentFragmentManager().beginTransaction()
@@ -38,8 +37,21 @@ public final class HomeFragment extends Fragment {
                         .replace(R.id.page, EntryFragment.class, null)
                         .addToBackStack(null)
                         .commit());
-        view.findViewById(R.id.pending_lists).setOnClickListener(showPreview);
-        view.findViewById(R.id.lists).setOnClickListener(showPreview);
-        view.findViewById(R.id.settings).setOnClickListener(showPreview);
+        ((TextView) view.findViewById(R.id.pending_lists)).setText(getString(R.string.queue_count, session.queue.size()));
+        view.findViewById(R.id.pending_lists).setOnClickListener(button -> open(PendingFragment.class));
+        if (session.latestLabel != null) {
+            ((TextView) view.findViewById(R.id.last_list)).setText(session.latestLabel);
+            ((TextView) view.findViewById(R.id.last_detail)).setText(getResources().getQuantityString(
+                    R.plurals.article_count, session.latestLines, session.latestLines));
+        }
+        observeNetwork();
+    }
+
+    @Override
+    protected void networkChanged(boolean connected) {
+        ((TextView) requireView().findViewById(R.id.dashboard_title)).setText(
+                connected ? R.string.home_title : R.string.offline_home);
+        requireView().findViewById(R.id.offline_hint).setVisibility(connected ? View.GONE : View.VISIBLE);
+        requireView().findViewById(R.id.refresh_warehouses).setVisibility(connected ? View.VISIBLE : View.GONE);
     }
 }

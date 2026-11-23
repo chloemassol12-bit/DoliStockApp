@@ -9,6 +9,9 @@ import androidx.fragment.app.Fragment;
 
 import fr.dolistocks.app.R;
 import fr.dolistocks.app.ui.sync.SyncFragment;
+import fr.dolistocks.app.MainActivity;
+import fr.dolistocks.app.ui.home.HomeFragment;
+import android.widget.Toast;
 
 /** Présente le formulaire de première connexion à Dolibarr. */
 public final class LoginFragment extends Fragment {
@@ -20,11 +23,19 @@ public final class LoginFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        view.findViewById(R.id.connect).setOnClickListener(button ->
-                getParentFragmentManager().beginTransaction()
+        view.findViewById(R.id.connect).setOnClickListener(button -> {
+            boolean online = Boolean.TRUE.equals(((MainActivity) requireActivity()).connected.getValue());
+            boolean initialized = requireContext().getSharedPreferences("tablet", 0)
+                    .getBoolean("initialized", false);
+            if (!online && !initialized) {
+                Toast.makeText(requireContext(), R.string.sync_required, Toast.LENGTH_SHORT).show();
+                return;
+            }
+            getParentFragmentManager().beginTransaction()
                         .setReorderingAllowed(true)
-                        .replace(R.id.page, SyncFragment.class, null)
+                        .replace(R.id.page, online ? SyncFragment.class : HomeFragment.class, null)
                         .addToBackStack(null)
-                        .commit());
+                        .commit();
+        });
     }
 }

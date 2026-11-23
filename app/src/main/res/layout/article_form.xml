@@ -1,0 +1,98 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/article_form"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/article_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/article_title"
+        android:textStyle="bold"
+        android:textSize="24sp" />
+    <TextView
+        android:id="@+id/draft_heading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@color/header_surface"
+        android:padding="14dp"
+        android:textSize="16sp" />
+    <TextView
+        android:id="@+id/reference_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/reference_label" />
+    <EditText
+        android:id="@+id/reference"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="@string/reference"
+        android:minHeight="48dp"
+        android:inputType="text"
+        android:singleLine="true" />
+    <Button
+        android:id="@+id/search_articles"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/search_articles"
+        android:minHeight="48dp"
+        android:textAllCaps="false" />
+    <TextView
+        android:id="@+id/article_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@color/header_surface"
+        android:padding="14dp"
+        android:textSize="16sp" />
+    <TextView
+        android:id="@+id/quantity_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/quantity_label" />
+    <EditText
+        android:id="@+id/quantity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="@string/quantity"
+        android:minHeight="48dp"
+        android:inputType="number"
+        android:singleLine="true" />
+    <Button
+        android:id="@+id/add_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/add_line"
+        android:minHeight="48dp"
+        android:textAllCaps="false" />
+    <LinearLayout
+        android:id="@+id/lines"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical" />
+    <Button
+        android:id="@+id/save_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/save_list"
+        android:minHeight="48dp"
+        android:textAllCaps="false"
+        android:backgroundTint="@color/accent"
+        android:textColor="@android:color/white" />
+    <TextView
+        android:id="@+id/stock_note"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/stock_note" />
+</LinearLayout>
