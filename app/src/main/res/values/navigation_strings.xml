@@ -1,3 +1,5 @@
 <resources>
     <string name="open_navigation">Ouvrir le menu de navigation</string>
+    <string name="work_offline">Travailler hors ligne</string>
+    <string name="resume_network">Revenir en ligne</string>
 </resources>

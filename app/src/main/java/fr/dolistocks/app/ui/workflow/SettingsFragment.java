@@ -40,6 +40,7 @@ public final class SettingsFragment extends WorkflowFragment {
         view.findViewById(R.id.settings_sync).setOnClickListener(button -> open(SyncFragment.class));
         view.findViewById(R.id.change_account).setOnClickListener(button -> {
             session.selected.clear();
+            host().setManualOffline(false);
             requireContext().getSharedPreferences("tablet", 0).edit().remove("initialized").apply();
             FragmentManager manager = getParentFragmentManager();
             manager.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);

@@ -25,6 +25,8 @@ import fr.dolistocks.app.ui.sync.ReadyFragment;
 import fr.dolistocks.app.ui.sync.SyncFragment;
 
 public class MainActivity extends FragmentActivity {
+    private static final String MANUAL_OFFLINE = "manual_offline";
+    private boolean manualOffline;
     public final MutableLiveData<Boolean> connected = new MutableLiveData<>();
     private final BroadcastReceiver networkReceiver = new BroadcastReceiver() {
         @Override
@@ -55,8 +57,9 @@ public class MainActivity extends FragmentActivity {
             NetworkInfo network = manager.getActiveNetworkInfo();
             available = network != null && network.isConnected();
         }
-        if (!Boolean.valueOf(available).equals(connected.getValue())) {
-            connected.setValue(available);
+        boolean online = available && !manualOffline;
+        if (!Boolean.valueOf(online).equals(connected.getValue())) {
+            connected.setValue(online);
             updateHeader();
         }
     }
@@ -66,6 +69,7 @@ public class MainActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        manualOffline = savedInstanceState != null && savedInstanceState.getBoolean(MANUAL_OFFLINE);
         super.onCreate(savedInstanceState);
         findViewById(R.id.navigation_menu).setOnClickListener(this::showNavigation);
         getSupportFragmentManager().addOnBackStackChangedListener(this::updateHeader);
@@ -91,7 +95,23 @@ public class MainActivity extends FragmentActivity {
         addDestination(menu, R.string.home, HomeFragment.class);
         addDestination(menu, R.string.lists, PendingFragment.class);
         addDestination(menu, R.string.settings, SettingsFragment.class);
+        menu.getMenu().add(manualOffline ? R.string.resume_network : R.string.work_offline)
+                .setOnMenuItemClickListener(item -> {
+                    setManualOffline(!manualOffline);
+                    return true;
+                });
         menu.show();
+    }
+
+    public void setManualOffline(boolean enabled) {
+        manualOffline = enabled;
+        refreshNetwork();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle state) {
+        super.onSaveInstanceState(state);
+        state.putBoolean(MANUAL_OFFLINE, manualOffline);
     }
 
     private void addDestination(PopupMenu menu, int label, Class<? extends Fragment> destination) {
