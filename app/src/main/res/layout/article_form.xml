@@ -20,6 +20,7 @@
         android:textSize="16sp" />
     <TextView
         android:id="@+id/reference_label"
+        android:labelFor="@+id/reference"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -33,14 +34,11 @@
         android:minHeight="48dp"
         android:inputType="text"
         android:singleLine="true" />
-    <Button
-        android:id="@+id/search_articles"
+    <LinearLayout
+        android:id="@+id/matches"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/search_articles"
-        android:minHeight="48dp"
-        android:textAllCaps="false" />
+        android:orientation="vertical" />
     <TextView
         android:id="@+id/article_details"
         android:accessibilityLiveRegion="polite"

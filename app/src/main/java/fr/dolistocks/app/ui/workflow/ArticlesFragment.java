@@ -44,12 +44,6 @@ public final class ArticlesFragment extends WorkflowFragment {
         };
         reference.addTextChangedListener(update);
         amount.addTextChangedListener(update);
-        View panel = view.findViewById(R.id.search_panel);
-        if (panel != null) {
-            panel.findViewById(R.id.return_entry).setVisibility(View.GONE);
-            ArticleSearch.bind(panel, session, this::pick);
-        }
-        view.findViewById(R.id.search_articles).setOnClickListener(button -> open(SearchFragment.class));
         view.findViewById(R.id.add_line).setOnClickListener(button -> addLine());
         view.findViewById(R.id.save_list).setOnClickListener(button -> {
             if (session.draft.lines.isEmpty()) {
@@ -61,15 +55,6 @@ public final class ArticlesFragment extends WorkflowFragment {
         });
         renderLines();
         observeNetwork();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (session.pickedReference != null) {
-            pick(session.pickedReference);
-            session.pickedReference = null;
-        }
     }
 
     private void pick(String reference) {
@@ -89,6 +74,8 @@ public final class ArticlesFragment extends WorkflowFragment {
         boolean known = DemoStock.CATALOG.containsKey(key);
         int value = positiveQuantity(root.findViewById(R.id.quantity));
         boolean valid = value > 0 && !key.isEmpty() && (!online() || known);
+        LinearLayout matches = root.findViewById(R.id.matches);
+        matches.removeAllViews();
         String preview = "";
         if (online() && known) {
             int before = session.stockAt(session.draft.warehouse).get(key);
@@ -99,19 +86,26 @@ public final class ArticlesFragment extends WorkflowFragment {
                 preview += "\n" + (valid ? getString(R.string.projected_stock, after)
                         : getString(R.string.stock_limit));
             }
-        } else if (online() && !key.isEmpty() && !isReferencePrefix(key)) {
-            preview = getString(R.string.unknown_ref);
+        } else if (online() && key.length() >= 3 && !showMatches(key)) {
+            preview = getString(R.string.no_match);
         }
         details.setVisibility(preview.isEmpty() ? View.GONE : View.VISIBLE);
         if (!preview.contentEquals(details.getText())) details.setText(preview);
         root.findViewById(R.id.add_line).setEnabled(valid);
     }
 
-    private boolean isReferencePrefix(String prefix) {
-        for (String key : DemoStock.CATALOG.keySet()) {
-            if (key.startsWith(prefix)) return true;
+    private boolean showMatches(String query) {
+        LinearLayout matches = requireView().findViewById(R.id.matches);
+        for (Map.Entry<String, String> article : DemoStock.CATALOG.entrySet()) {
+            String key = article.getKey();
+            String name = article.getValue();
+            if (!key.contains(query) && !name.toUpperCase(Locale.ROOT).contains(query)) continue;
+            Button choice = new Button(requireContext());
+            choice.setText(getString(R.string.stock_format, key, name, session.stockAt(session.draft.warehouse).get(key)));
+            choice.setOnClickListener(button -> pick(key));
+            matches.addView(choice);
         }
-        return false;
+        return matches.getChildCount() > 0;
     }
 
     private int positiveQuantity(EditText input) {
@@ -187,9 +181,8 @@ public final class ArticlesFragment extends WorkflowFragment {
         View root = requireView();
         ((TextView) root.findViewById(R.id.article_title)).setText(connected ? R.string.article_title : R.string.offline_entry);
         ((TextView) root.findViewById(R.id.stock_note)).setText(connected ? R.string.stock_note : R.string.offline_stock);
-        View panel = root.findViewById(R.id.search_panel);
-        if (panel != null) panel.setVisibility(connected ? View.VISIBLE : View.GONE);
-        root.findViewById(R.id.search_articles).setVisibility(connected && panel == null ? View.VISIBLE : View.GONE);
+        ((TextView) root.findViewById(R.id.reference_label)).setText(connected ? R.string.search_label : R.string.reference_label);
+        ((EditText) root.findViewById(R.id.reference)).setHint(connected ? R.string.unified_hint : R.string.reference);
         updatePreview();
     }
 }

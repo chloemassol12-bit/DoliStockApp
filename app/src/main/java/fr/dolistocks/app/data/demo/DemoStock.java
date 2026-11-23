@@ -40,7 +40,6 @@ public final class DemoStock extends ViewModel {
     private final Map<String, Map<String, Integer>> warehouseStocks = new LinkedHashMap<>();
     public StockList draft;
     public StockList editing;
-    public String pickedReference;
     public String latestLabel;
     public int latestLines;
 
@@ -68,7 +67,6 @@ public final class DemoStock extends ViewModel {
     public void start(StockList header) {
         editing = null;
         draft = header;
-        pickedReference = null;
     }
 
     public void edit(StockList original) {

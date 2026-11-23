@@ -2,16 +2,12 @@
     <string name="article_title">Saisie connectée</string>
     <string name="reference_label">Référence / code-barres</string>
     <string name="reference">Scanner ou saisir la référence</string>
-    <string name="search_articles">Rechercher par référence ou désignation</string>
     <string name="quantity_label">Quantité entière</string>
     <string name="quantity">Quantité</string>
     <string name="add_line">Ajouter</string>
     <string name="save_list">Enregistrer sur l’appareil</string>
     <string name="stock_note">Les données restent locales jusqu’à l’envoi.</string>
-    <string name="search_title">Recherche d’articles</string>
-    <string name="search_label">Recherche (3 caractères minimum)</string>
-    <string name="query">Référence ou désignation</string>
-    <string name="return_entry">Retour à la saisie</string>
+    <string name="search_label">Référence, code-barres ou désignation</string>
     <string name="queue_title">Listes à envoyer</string>
     <string name="queue_help">Sélectionnez les listes à transmettre.</string>
     <string name="edit_list">Modifier la liste sélectionnée</string>
@@ -56,13 +52,11 @@
     <string name="remove">Supprimer</string>
     <string name="queue_count">Listes à envoyer (%1$d)</string>
     <string name="send_count">Envoyer la sélection (%1$d)</string>
-    <string name="search_min">Saisissez au moins trois caractères.</string>
     <string name="stock_format">%1$s · %2$s\nStock actuel : %3$d</string>
     <string name="line_format">%1$s · quantité : %2$d</string>
     <string name="sent_ok">Mise à jour OUI</string>
     <string name="sent_error">Mise à jour NON · Référence inconnue · Stock inchangé</string>
     <string name="stock_change">Avant : %1$d → Après : %2$d</string>
-    <string name="select_article">Sélectionner %1$s</string>
     <string name="edit_quantity">Modifier la quantité</string>
     <string name="save">Enregistrer</string>
     <string name="mode_add">Ajout</string>
@@ -71,4 +65,5 @@
     <string name="sync_required">Une connexion est nécessaire pour synchroniser.</string>
     <string name="projected_stock">Stock prévu après envoi : %1$d</string>
     <string name="stock_limit">Cette quantité dépasse le stock maximal.</string>
+    <string name="unified_hint">Scanner ou saisir au moins 3 caractères</string>
 </resources>
