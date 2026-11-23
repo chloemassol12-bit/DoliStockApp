@@ -26,6 +26,7 @@ public final class SyncFragment extends Fragment {
             requireContext().getSharedPreferences("tablet", 0).edit().putBoolean("initialized", true).apply();
             getParentFragmentManager().beginTransaction()
                         .setReorderingAllowed(true)
+                        .setTransition(androidx.fragment.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                         .replace(R.id.page, ReadyFragment.class, null)
                         .addToBackStack(null)
                         .commit();

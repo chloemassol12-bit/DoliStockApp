@@ -28,6 +28,7 @@ public abstract class WorkflowFragment extends Fragment {
 
     protected void open(Class<? extends Fragment> screen) {
         getParentFragmentManager().beginTransaction().setReorderingAllowed(true)
+                .setTransition(androidx.fragment.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .replace(R.id.page, screen, null).addToBackStack(null).commit();
     }
 

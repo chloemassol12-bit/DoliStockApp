@@ -99,6 +99,7 @@ public class MainActivity extends FragmentActivity {
         item.setEnabled(!destination.isInstance(getSupportFragmentManager().findFragmentById(R.id.page)));
         item.setOnMenuItemClickListener(selected -> {
             getSupportFragmentManager().beginTransaction().setReorderingAllowed(true)
+                    .setTransition(androidx.fragment.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                     .replace(R.id.page, destination, null).addToBackStack(null).commit();
             return true;
         });

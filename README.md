@@ -23,6 +23,8 @@
 
 ## Interface responsive
 
+- Pendant la saisie connectée, la référence et la quantité actualisent un aperçu du stock prévu selon le mode Ajout ou Remplacement. Hors ligne, la référence reste saisissable sans estimation de stock distant.
+
 - Les écrans partagent les mêmes repères visuels : action principale pleine, actions secondaires à contour, champs avec bordure de focus et état réseau toujours écrit. La file d’envoi souligne les listes cochées ; les confirmations et résultats regroupent les informations dans des cartes.
 
 - Après la synchronisation initiale, le bouton de menu dans la barre de titre donne accès à Accueil, Listes et Paramètres sur téléphone et tablette. Le bouton Retour ferme le menu ouvert.

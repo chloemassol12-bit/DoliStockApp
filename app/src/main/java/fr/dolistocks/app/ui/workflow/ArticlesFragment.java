@@ -3,6 +3,8 @@ package fr.dolistocks.app.ui.workflow;
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.text.InputType;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,7 +36,14 @@ public final class ArticlesFragment extends WorkflowFragment {
         heading.setText(session.draft.heading() + " · " + getString(session.draft.replace
                 ? R.string.mode_replace : R.string.mode_add));
         EditText reference = view.findViewById(R.id.reference);
-        reference.setOnFocusChangeListener((field, focused) -> { if (!focused) showStock(); });
+        EditText amount = view.findViewById(R.id.quantity);
+        TextWatcher update = new TextWatcher() {
+            public void beforeTextChanged(CharSequence text, int start, int count, int after) {}
+            public void onTextChanged(CharSequence text, int start, int before, int count) { updatePreview(); }
+            public void afterTextChanged(Editable text) {}
+        };
+        reference.addTextChangedListener(update);
+        amount.addTextChangedListener(update);
         View panel = view.findViewById(R.id.search_panel);
         if (panel != null) {
             panel.findViewById(R.id.return_entry).setVisibility(View.GONE);
@@ -65,7 +74,6 @@ public final class ArticlesFragment extends WorkflowFragment {
 
     private void pick(String reference) {
         ((EditText) requireView().findViewById(R.id.reference)).setText(reference);
-        showStock();
         requireView().findViewById(R.id.quantity).requestFocus();
     }
 
@@ -74,24 +82,52 @@ public final class ArticlesFragment extends WorkflowFragment {
         return input.getText().toString().trim().toUpperCase(Locale.ROOT);
     }
 
-    private void showStock() {
-        TextView details = requireView().findViewById(R.id.article_details);
-        String reference = reference();
-        details.setVisibility(online() && !reference.isEmpty() ? View.VISIBLE : View.GONE);
-        details.setText(DemoStock.CATALOG.containsKey(reference) ? getString(R.string.stock_format,
-                reference, DemoStock.CATALOG.get(reference), session.stockAt(session.draft.warehouse).get(reference))
-                : getString(R.string.unknown_ref));
+    private void updatePreview() {
+        View root = requireView();
+        TextView details = root.findViewById(R.id.article_details);
+        String key = reference();
+        boolean known = DemoStock.CATALOG.containsKey(key);
+        int value = positiveQuantity(root.findViewById(R.id.quantity));
+        boolean valid = value > 0 && !key.isEmpty() && (!online() || known);
+        String preview = "";
+        if (online() && known) {
+            int before = session.stockAt(session.draft.warehouse).get(key);
+            preview = getString(R.string.stock_format, key, DemoStock.CATALOG.get(key), before);
+            if (value > 0) {
+                long after = session.draft.replace ? value : (long) before + value;
+                valid = after <= Integer.MAX_VALUE;
+                preview += "\n" + (valid ? getString(R.string.projected_stock, after)
+                        : getString(R.string.stock_limit));
+            }
+        } else if (online() && !key.isEmpty() && !isReferencePrefix(key)) {
+            preview = getString(R.string.unknown_ref);
+        }
+        details.setVisibility(preview.isEmpty() ? View.GONE : View.VISIBLE);
+        if (!preview.contentEquals(details.getText())) details.setText(preview);
+        root.findViewById(R.id.add_line).setEnabled(valid);
     }
 
-    private int quantity(EditText input) {
+    private boolean isReferencePrefix(String prefix) {
+        for (String key : DemoStock.CATALOG.keySet()) {
+            if (key.startsWith(prefix)) return true;
+        }
+        return false;
+    }
+
+    private int positiveQuantity(EditText input) {
         try {
             int value = Integer.parseInt(input.getText().toString());
             if (value > 0) return value;
         } catch (NumberFormatException ignored) {
             // Une saisie vide ou trop grande reste modifiable.
         }
-        input.setError(getString(R.string.invalid_qty));
         return 0;
+    }
+
+    private int quantity(EditText input) {
+        int value = positiveQuantity(input);
+        if (value == 0) input.setError(getString(R.string.invalid_qty));
+        return value;
     }
 
     private void addLine() {
@@ -108,12 +144,12 @@ public final class ArticlesFragment extends WorkflowFragment {
         input.setText("");
         amount.setText("");
         input.requestFocus();
-        showStock();
         renderLines();
     }
 
     private void renderLines() {
         LinearLayout rows = requireView().findViewById(R.id.lines);
+        requireView().findViewById(R.id.save_list).setEnabled(!session.draft.lines.isEmpty());
         rows.removeAllViews();
         for (Map.Entry<String, Integer> line : session.draft.lines.entrySet()) {
             Button edit = new Button(requireContext());
@@ -154,6 +190,6 @@ public final class ArticlesFragment extends WorkflowFragment {
         View panel = root.findViewById(R.id.search_panel);
         if (panel != null) panel.setVisibility(connected ? View.VISIBLE : View.GONE);
         root.findViewById(R.id.search_articles).setVisibility(connected && panel == null ? View.VISIBLE : View.GONE);
-        showStock();
+        updatePreview();
     }
 }

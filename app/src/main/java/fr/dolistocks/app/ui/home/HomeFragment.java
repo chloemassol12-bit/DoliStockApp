@@ -27,12 +27,14 @@ public final class HomeFragment extends WorkflowFragment {
         view.findViewById(R.id.refresh_warehouses).setOnClickListener(button ->
                 getParentFragmentManager().beginTransaction()
                         .setReorderingAllowed(true)
+                        .setTransition(androidx.fragment.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                         .replace(R.id.page, SyncFragment.class, null)
                         .addToBackStack(null)
                         .commit());
         view.findViewById(R.id.new_list).setOnClickListener(button ->
                 getParentFragmentManager().beginTransaction()
                         .setReorderingAllowed(true)
+                        .setTransition(androidx.fragment.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                         .replace(R.id.page, EntryFragment.class, null)
                         .addToBackStack(null)
                         .commit());

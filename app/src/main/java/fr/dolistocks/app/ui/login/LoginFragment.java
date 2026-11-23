@@ -33,6 +33,7 @@ public final class LoginFragment extends Fragment {
             }
             getParentFragmentManager().beginTransaction()
                         .setReorderingAllowed(true)
+                        .setTransition(androidx.fragment.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                         .replace(R.id.page, online ? SyncFragment.class : HomeFragment.class, null)
                         .addToBackStack(null)
                         .commit();

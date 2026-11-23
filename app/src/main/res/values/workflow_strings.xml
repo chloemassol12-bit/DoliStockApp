@@ -69,4 +69,6 @@
     <string name="mode_replace">Remplacement</string>
     <string name="line_remove">Supprimer %1$s</string>
     <string name="sync_required">Une connexion est nécessaire pour synchroniser.</string>
+    <string name="projected_stock">Stock prévu après envoi : %1$d</string>
+    <string name="stock_limit">Cette quantité dépasse le stock maximal.</string>
 </resources>

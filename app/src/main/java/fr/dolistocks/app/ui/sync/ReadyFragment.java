@@ -24,6 +24,7 @@ public final class ReadyFragment extends Fragment {
         view.findViewById(R.id.open_home).setOnClickListener(button ->
                 getParentFragmentManager().beginTransaction()
                         .setReorderingAllowed(true)
+                        .setTransition(androidx.fragment.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                         .replace(R.id.page, HomeFragment.class, null)
                         .addToBackStack(null)
                         .commit());
