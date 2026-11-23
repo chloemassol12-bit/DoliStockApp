@@ -30,7 +30,6 @@ public final class HomeFragment extends WorkflowFragment {
                         .replace(R.id.page, SyncFragment.class, null)
                         .addToBackStack(null)
                         .commit());
-        view.findViewById(R.id.home).setEnabled(false);
         view.findViewById(R.id.new_list).setOnClickListener(button ->
                 getParentFragmentManager().beginTransaction()
                         .setReorderingAllowed(true)

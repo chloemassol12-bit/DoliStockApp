@@ -23,6 +23,8 @@
 
 ## Interface responsive
 
+- Après la synchronisation initiale, le bouton de menu dans la barre de titre donne accès à Accueil, Listes et Paramètres sur téléphone et tablette. Le bouton Retour ferme le menu ouvert.
+
 - Adapter les écrans à la largeur disponible de la fenêtre, en portrait et en paysage. Utiliser les dp pour la disposition, les sp pour le texte et une hauteur de contenu flexible.
 - Pour Connexion et Synchronisation, conserver 16 dp de marge latérale. La colonne occupe la largeur restante sur téléphone et se centre à 484 dp dès que la fenêtre atteint 516 dp.
 - Garder les champs et les boutons accessibles par défilement lorsque le clavier réduit la hauteur disponible ou que le texte est agrandi. Prévoir au moins 48 dp pour les cibles tactiles.

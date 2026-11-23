@@ -4,80 +4,73 @@
     android:layout_height="match_parent"
     android:background="@android:color/white">
     <LinearLayout
-        style="@style/HomeSections"
+        android:padding="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
-        <include layout="@layout/navigation_stock" />
-        <LinearLayout
-            style="@style/HomeBody"
+        android:orientation="vertical"
+        android:focusableInTouchMode="true">
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:focusableInTouchMode="true">
-            <TextView
-                android:layout_width="match_parent"
+            android:text="@string/entry_title"
+            android:textStyle="bold"
+            android:textSize="24sp" />
+        <TextView
+            style="@style/LoginLabel"
+            android:text="@string/entry_warehouse"
+            android:labelFor="@+id/entry_warehouse" />
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@id/entry_warehouse"
+            android:minHeight="48dp"
+            android:entries="@array/entry_warehouses"
+            android:prompt="@string/entry_warehouse" />
+        <TextView
+            style="@style/LoginLabel"
+            android:text="@string/entry_label"
+            android:labelFor="@+id/entry_label" />
+        <EditText
+            style="@style/LoginField"
+            android:id="@id/entry_label"
+            android:text="@string/entry_example"
+            android:inputType="textCapSentences"
+            android:imeOptions="actionDone" />
+        <TextView
+            style="@style/LoginLabel"
+            android:text="@string/entry_mode"
+            android:labelFor="@+id/entry_mode" />
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@id/entry_mode"
+            android:orientation="horizontal"
+            android:checkedButton="@+id/entry_add">
+            <RadioButton
+                android:id="@+id/entry_add"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/entry_title"
-                android:textStyle="bold"
-                android:textSize="24sp" />
-            <TextView
-                style="@style/LoginLabel"
-                android:text="@string/entry_warehouse"
-                android:labelFor="@+id/entry_warehouse" />
-            <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@id/entry_warehouse"
                 android:minHeight="48dp"
-                android:entries="@array/entry_warehouses"
-                android:prompt="@string/entry_warehouse" />
-            <TextView
-                style="@style/LoginLabel"
-                android:text="@string/entry_label"
-                android:labelFor="@+id/entry_label" />
-            <EditText
-                style="@style/LoginField"
-                android:id="@id/entry_label"
-                android:text="@string/entry_example"
-                android:inputType="textCapSentences"
-                android:imeOptions="actionDone" />
-            <TextView
-                style="@style/LoginLabel"
-                android:text="@string/entry_mode"
-                android:labelFor="@+id/entry_mode" />
-            <RadioGroup
-                android:layout_width="match_parent"
+                android:text="@string/entry_add" />
+            <RadioButton
+                android:id="@+id/entry_replace"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@id/entry_mode"
-                android:orientation="horizontal"
-                android:checkedButton="@+id/entry_add">
-                <RadioButton
-                    android:id="@+id/entry_add"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:minHeight="48dp"
-                    android:text="@string/entry_add" />
-                <RadioButton
-                    android:id="@+id/entry_replace"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:minHeight="48dp"
-                    android:text="@string/entry_replace" />
-            </RadioGroup>
-            <TextView
-                style="@style/LoginLabel"
-                android:text="@string/entry_help" />
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/add_articles"
-                android:text="@string/entry_articles"
                 android:minHeight="48dp"
-                android:layout_marginTop="14dp"
-                android:textAllCaps="false"
-                android:backgroundTint="@color/accent"
-                android:textColor="@android:color/white" />
-        </LinearLayout>
+                android:text="@string/entry_replace" />
+        </RadioGroup>
+        <TextView
+            style="@style/LoginLabel"
+            android:text="@string/entry_help" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/add_articles"
+            android:text="@string/entry_articles"
+            android:minHeight="48dp"
+            android:layout_marginTop="14dp"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/accent"
+            android:textColor="@android:color/white" />
     </LinearLayout>
 </ScrollView>

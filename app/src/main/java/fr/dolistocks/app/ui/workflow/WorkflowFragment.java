@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModelProvider;
 import fr.dolistocks.app.MainActivity;
 import fr.dolistocks.app.R;
 import fr.dolistocks.app.data.demo.DemoStock;
-import fr.dolistocks.app.ui.home.HomeFragment;
 
 /** Navigation commune aux écrans accessibles après la première synchronisation. */
 public abstract class WorkflowFragment extends Fragment {
@@ -25,15 +24,6 @@ public abstract class WorkflowFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle state) {
         super.onViewCreated(view, state);
         session = new ViewModelProvider(requireActivity()).get(DemoStock.class);
-        destination(view, R.id.home, HomeFragment.class);
-        destination(view, R.id.lists, PendingFragment.class);
-        destination(view, R.id.settings, SettingsFragment.class);
-    }
-
-    private void destination(View root, int id, Class<? extends Fragment> screen) {
-        View button = root.findViewById(id);
-        button.setEnabled(!screen.isInstance(this));
-        button.setOnClickListener(clicked -> open(screen));
     }
 
     protected void open(Class<? extends Fragment> screen) {

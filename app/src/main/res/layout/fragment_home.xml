@@ -4,90 +4,83 @@
     android:layout_height="match_parent"
     android:background="@android:color/white">
     <LinearLayout
-        style="@style/HomeSections"
+        android:padding="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
-        <include layout="@layout/navigation_stock" />
-        <LinearLayout
-            style="@style/HomeBody"
+        android:orientation="vertical">
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:id="@+id/dashboard_title"
+            android:text="@string/home_title"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/new_list"
+            android:minHeight="48dp"
+            android:text="@string/new_list"
+            android:textAllCaps="false"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/accent"
+            android:textColor="@android:color/white" />
+        <TextView
+            android:id="@+id/offline_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/offline_help"
+            android:visibility="gone" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/pending_lists"
+            android:minHeight="48dp"
+            android:text="@string/pending_lists"
+            android:textAllCaps="false"
+            android:layout_marginTop="8dp" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/refresh_warehouses"
+            android:minHeight="48dp"
+            android:text="@string/refresh_warehouses"
+            android:textAllCaps="false"
+            android:layout_marginTop="8dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/recent"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/header_surface"
+            android:padding="16dp"
+            android:layout_marginTop="8dp">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/dashboard_title"
-                android:text="@string/home_title"
-                android:textSize="24sp"
+                android:id="@+id/last_list"
+                android:text="@string/recent_list"
+                android:textSize="16sp"
                 android:textStyle="bold" />
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/new_list"
-                android:minHeight="48dp"
-                android:text="@string/new_list"
-                android:textAllCaps="false"
-                android:layout_marginTop="8dp"
-                android:backgroundTint="@color/accent"
-                android:textColor="@android:color/white" />
-            <TextView
-                android:id="@+id/offline_hint"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/offline_help"
-                android:visibility="gone" />
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/pending_lists"
-                android:minHeight="48dp"
-                android:text="@string/pending_lists"
-                android:textAllCaps="false"
-                android:layout_marginTop="8dp" />
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/refresh_warehouses"
-                android:minHeight="48dp"
-                android:text="@string/refresh_warehouses"
-                android:textAllCaps="false"
-                android:layout_marginTop="8dp" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/recent"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_marginTop="16dp" />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@color/header_surface"
-                android:padding="16dp"
-                android:layout_marginTop="8dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/last_list"
-                    android:text="@string/recent_list"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/last_detail"
-                    android:text="@string/recent_detail"
-                    android:textSize="14sp"
-                    android:layout_marginTop="6dp" />
-            </LinearLayout>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/ready_last_sync"
+                android:id="@+id/last_detail"
+                android:text="@string/recent_detail"
                 android:textSize="14sp"
-                android:layout_marginTop="14dp" />
+                android:layout_marginTop="6dp" />
         </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ready_last_sync"
+            android:textSize="14sp"
+            android:layout_marginTop="14dp" />
     </LinearLayout>
 </ScrollView>

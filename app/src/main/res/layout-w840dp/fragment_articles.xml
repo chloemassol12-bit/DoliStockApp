@@ -4,19 +4,17 @@
     android:layout_height="match_parent"
     android:background="@android:color/white">
     <LinearLayout
-        style="@style/HomeSections"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp">
-        <include layout="@layout/navigation_stock" />
         <include layout="@layout/search_panel"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_marginStart="16dp"
             android:layout_height="wrap_content" />
         <LinearLayout
             android:layout_weight="1.4"
-            style="@style/HomeBody"
+            android:layout_marginStart="16dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical">

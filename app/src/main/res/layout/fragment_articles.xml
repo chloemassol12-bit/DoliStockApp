@@ -4,17 +4,10 @@
     android:layout_height="match_parent"
     android:background="@android:color/white">
     <LinearLayout
-        style="@style/HomeSections"
+        android:padding="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
-        <include layout="@layout/navigation_stock" />
-        <LinearLayout
-            style="@style/HomeBody"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <include layout="@layout/article_form" />
-        </LinearLayout>
+        android:orientation="vertical">
+        <include layout="@layout/article_form" />
     </LinearLayout>
 </ScrollView>
