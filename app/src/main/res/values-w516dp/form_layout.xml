@@ -1,0 +1,6 @@
+<resources>
+    <style name="FormColumn">
+        <item name="android:layout_width">484dp</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+    </style>
+</resources>

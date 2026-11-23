@@ -1,0 +1,10 @@
+<resources>
+    <string name="sync_title">Synchronisation requise</string>
+    <string name="sync_intro">Préparer les données nécessaires à la saisie hors ligne.</string>
+    <string name="sync_warehouses">Entrepôts</string>
+    <string name="sync_pending">À synchroniser</string>
+    <string name="sync_now">Synchroniser maintenant</string>
+    <string name="sync_footer">Le hors ligne reste verrouillé jusqu’à la fin de la synchronisation.</string>
+    <string name="sync_connected">Connecté</string>
+    <string name="sync_preview">Maquette · Synchronisation des entrepôts à venir.</string>
+</resources>

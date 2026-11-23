@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">DoliStocks</string>
+    <string name="login_title">Connexion</string>
+    <string name="server">Serveur Dolibarr</string>
+    <string name="username">Utilisateur</string>
+    <string name="password">Mot de passe</string>
+    <string name="server_hint">https://votre-serveur.fr</string>
+    <string name="username_hint">Votre identifiant</string>
+    <string name="password_hint">••••••••••••••••</string>
+    <string name="connect">Se connecter</string>
+    <string name="first_connection">Première connexion en ligne et synchronisation requises.</string>
+    <string name="login_preview">Maquette · Connexion au serveur à venir.</string>
+</resources>
