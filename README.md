@@ -16,7 +16,10 @@
 - Donner une responsabilité précise à chaque classe. Commenter les intentions et les contraintes difficiles à déduire du code. Documenter les intégrations en attente par un TODO précis.
 - Dans le parcours statique, « Se connecter » ouvre la page Synchronisation. Le statut « Connecté » illustre la maquette. Aucune donnée saisie ne doit être envoyée ou journalisée.
 - La validation client limite la synchronisation aux entrepôts et supprime le passage manuel hors ligne. Dans la maquette, « Synchroniser maintenant » ouvre « Appareil prêt », puis « Accéder à l’accueil » ouvre l’accueil connecté. Les quantités, les dates et l’activité récente sont des exemples fixes.
-- Depuis l’accueil, « Nouvelle liste » ouvre « Nouvelle saisie ». Les deux écrans partagent une navigation latérale à partir de 600 dp. L’entrepôt, le libellé et le mode sont modifiables dans la maquette. Les entrepôts proposés sont des exemples ; le dépôt facultatif par défaut devra provenir des paramètres de la tablette. Le bouton « Ajouter des articles » annonce le prochain écran.
+- Depuis l’accueil, « Nouvelle liste » ouvre la saisie de l’entrepôt, du libellé et du mode. La saisie des articles accepte une référence tapée ou lue par une douchette clavier. La recherche illustrée par référence ou désignation commence à trois caractères. Elle apparaît à côté de la saisie à partir de 840 dp.
+- La file permet de modifier une liste, de supprimer une sélection et de confirmer un envoi groupé. Le résultat détaille chaque ligne. Dans la démonstration, les lignes réussies quittent la file et les erreurs restent corrigeables. Les articles, quantités et résultats sont simulés en mémoire pendant la session.
+- Après une première synchronisation simulée, couper le réseau de l’émulateur affiche les états hors ligne de l’accueil, de la saisie, de la file et des paramètres. La recherche distante et l’envoi redeviennent disponibles au retour du réseau.
+- Dans les paramètres, choisir un dépôt par défaut ou « Aucun dépôt par défaut ». Ce réglage et l’initialisation sont conservés sur la tablette. Le branchement REST, la conservation durable des listes et la gestion réelle des identifiants restent à réaliser.
 
 ## Interface responsive
 
