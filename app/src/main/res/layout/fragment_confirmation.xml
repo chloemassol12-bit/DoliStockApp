@@ -2,20 +2,19 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white">
+    android:background="@color/canvas">
     <LinearLayout
         android:padding="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <TextView
+            style="@style/ScreenTitle"
             android:id="@+id/confirm_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@string/confirm_title"
-            android:textStyle="bold"
-            android:textSize="24sp" />
+            android:text="@string/confirm_title" />
         <TextView
             android:id="@+id/confirm_question"
             android:layout_width="match_parent"
@@ -35,15 +34,14 @@
             android:layout_marginTop="8dp"
             android:text="@string/confirm_note" />
         <Button
+            style="@style/StockPrimary"
             android:id="@+id/confirm_send"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/confirm_send"
             android:minHeight="48dp"
-            android:textAllCaps="false"
-            android:backgroundTint="@color/accent"
-            android:textColor="@android:color/white" />
+            android:textAllCaps="false" />
         <Button
             android:id="@+id/cancel_send"
             android:layout_width="match_parent"

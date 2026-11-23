@@ -1,4 +1,13 @@
 <resources>
-    <color name="accent">#185C64</color>
-    <color name="header_surface">#E6F1F1</color>
+    <color name="accent">#006C66</color>
+    <color name="header_surface">#143541</color>
+    <color name="canvas">#F3F6F7</color>
+    <color name="ink">#182D37</color>
+    <color name="muted">#49616C</color>
+    <color name="outline">#BACBD0</color>
+    <color name="soft">#E1F4EF</color>
+    <color name="disabled_surface">#E0E7E9</color>
+    <color name="warning_surface">#FFE5BB</color>
+    <color name="warning_ink">#694107</color>
+    <color name="disabled_ink">#53656B</color>
 </resources>

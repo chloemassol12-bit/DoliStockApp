@@ -2,7 +2,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white">
+    android:background="@color/canvas">
     <LinearLayout
         android:padding="16dp"
         android:layout_width="match_parent"
@@ -10,11 +10,10 @@
         android:orientation="vertical"
         android:focusableInTouchMode="true">
         <TextView
+            style="@style/ScreenTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/entry_title"
-            android:textStyle="bold"
-            android:textSize="24sp" />
+            android:text="@string/entry_title" />
         <TextView
             style="@style/LoginLabel"
             android:text="@string/entry_warehouse"
@@ -63,14 +62,13 @@
             style="@style/LoginLabel"
             android:text="@string/entry_help" />
         <Button
+            style="@style/StockPrimary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/add_articles"
             android:text="@string/entry_articles"
             android:minHeight="48dp"
             android:layout_marginTop="14dp"
-            android:textAllCaps="false"
-            android:backgroundTint="@color/accent"
-            android:textColor="@android:color/white" />
+            android:textAllCaps="false" />
     </LinearLayout>
 </ScrollView>

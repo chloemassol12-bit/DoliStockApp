@@ -79,7 +79,11 @@ public class MainActivity extends FragmentActivity {
                 || page instanceof WorkflowFragment;
         TextView status = findViewById(R.id.connection_status);
         status.setVisibility(showStatus ? View.VISIBLE : View.GONE);
-        status.setText(Boolean.FALSE.equals(connected.getValue()) ? R.string.offline : R.string.sync_connected);
+        boolean offline = Boolean.FALSE.equals(connected.getValue());
+        status.setText(offline ? R.string.offline : R.string.sync_connected);
+        status.setBackgroundResource(offline ? R.drawable.status_offline : R.drawable.status_online);
+        status.setTextColor(androidx.core.content.ContextCompat.getColor(this,
+                offline ? R.color.warning_ink : R.color.accent));
     }
 
     private void showNavigation(View anchor) {

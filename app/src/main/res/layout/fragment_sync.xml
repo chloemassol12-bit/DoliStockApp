@@ -2,7 +2,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="@color/canvas"
     android:paddingStart="16dp"
     android:paddingEnd="16dp">
     <LinearLayout
@@ -12,18 +12,16 @@
         android:paddingTop="32dp"
         android:paddingBottom="24dp">
         <TextView
+            style="@style/ScreenTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/sync_title"
-            android:textSize="24sp"
-            android:textColor="#263D42"
-            android:textStyle="bold" />
+            android:text="@string/sync_title" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/sync_intro"
             android:textSize="14sp"
-            android:textColor="#263D42"
+            android:textColor="@color/ink"
             android:layout_marginTop="8dp" />
         <LinearLayout
             android:layout_width="match_parent"
@@ -31,38 +29,37 @@
             android:orientation="vertical"
             android:padding="16dp"
             android:layout_marginTop="20dp"
-            android:background="@color/header_surface">
+            android:background="@drawable/surface_card">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/sync_warehouses"
                 android:textSize="16sp"
-                android:textColor="#263D42"
+                android:textColor="@color/ink"
                 android:textStyle="bold" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/sync_pending"
                 android:textSize="14sp"
-                android:textColor="#263D42"
+                android:textColor="@color/ink"
                 android:layout_marginTop="6dp" />
         </LinearLayout>
         <Button
+            style="@style/StockPrimary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/sync_now"
             android:minHeight="48dp"
             android:layout_marginTop="14dp"
-            android:backgroundTint="@color/accent"
             android:text="@string/sync_now"
-            android:textColor="@android:color/white"
             android:textAllCaps="false" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/sync_footer"
             android:textSize="14sp"
-            android:textColor="#263D42"
+            android:textColor="@color/ink"
             android:layout_marginTop="14dp" />
     </LinearLayout>
 </ScrollView>

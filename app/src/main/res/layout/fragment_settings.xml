@@ -2,20 +2,19 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white">
+    android:background="@color/canvas">
     <LinearLayout
         android:padding="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <TextView
+            style="@style/ScreenTitle"
             android:id="@+id/settings_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@string/settings_title"
-            android:textStyle="bold"
-            android:textSize="24sp" />
+            android:text="@string/settings_title" />
         <TextView
             android:id="@+id/api_label"
             android:layout_width="match_parent"
@@ -28,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/api_url"
-            android:background="@color/header_surface"
+            android:background="@drawable/surface_card"
             android:padding="14dp"
             android:textSize="16sp" />
         <TextView
@@ -43,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/account_name"
-            android:background="@color/header_surface"
+            android:background="@drawable/surface_card"
             android:padding="14dp"
             android:textSize="16sp" />
         <TextView
@@ -58,7 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/masked_key"
-            android:background="@color/header_surface"
+            android:background="@drawable/surface_card"
             android:padding="14dp"
             android:textSize="16sp" />
         <TextView
@@ -79,19 +78,18 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/sync_summary"
-            android:background="@color/header_surface"
+            android:background="@drawable/surface_card"
             android:padding="14dp"
             android:textSize="16sp" />
         <Button
+            style="@style/StockPrimary"
             android:id="@+id/settings_sync"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/settings_sync"
             android:minHeight="48dp"
-            android:textAllCaps="false"
-            android:backgroundTint="@color/accent"
-            android:textColor="@android:color/white" />
+            android:textAllCaps="false" />
         <Button
             android:id="@+id/change_account"
             android:layout_width="match_parent"

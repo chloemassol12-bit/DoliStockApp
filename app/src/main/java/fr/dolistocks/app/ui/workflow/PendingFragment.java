@@ -43,8 +43,7 @@ public final class PendingFragment extends WorkflowFragment {
             rows.addView(empty);
         }
         for (StockList list : session.queue) {
-            CheckBox check = new CheckBox(requireContext());
-            check.setMinHeight((int) (48 * getResources().getDisplayMetrics().density));
+            CheckBox check = (CheckBox) getLayoutInflater().inflate(R.layout.row_select_list, rows, false);
             check.setText(list.heading() + "\n" + getResources().getQuantityString(
                     R.plurals.article_count, list.lines.size(), list.lines.size()));
             check.setChecked(session.selected.contains(list));

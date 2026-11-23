@@ -20,7 +20,7 @@ public final class ConfirmationFragment extends WorkflowFragment {
         super.onViewCreated(view, state);
         LinearLayout rows = view.findViewById(R.id.selected_lists);
         for (StockList list : session.selected) {
-            TextView item = new TextView(requireContext());
+            TextView item = (TextView) getLayoutInflater().inflate(R.layout.row_stock_summary, rows, false);
             item.setText(list.heading() + " · " + getString(list.replace ? R.string.mode_replace : R.string.mode_add));
             rows.addView(item);
         }

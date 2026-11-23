@@ -24,7 +24,7 @@ public final class ResultFragment extends WorkflowFragment {
             header.setText(result.getKey().heading());
             rows.addView(header);
             for (Map.Entry<String, String> line : result.getValue().entrySet()) {
-                TextView detail = new TextView(requireContext());
+                TextView detail = (TextView) getLayoutInflater().inflate(R.layout.row_stock_summary, rows, false);
                 detail.setText(line.getKey() + " · " + line.getValue());
                 rows.addView(detail);
             }

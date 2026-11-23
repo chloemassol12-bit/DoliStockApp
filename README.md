@@ -23,6 +23,8 @@
 
 ## Interface responsive
 
+- Les écrans partagent les mêmes repères visuels : action principale pleine, actions secondaires à contour, champs avec bordure de focus et état réseau toujours écrit. La file d’envoi souligne les listes cochées ; les confirmations et résultats regroupent les informations dans des cartes.
+
 - Après la synchronisation initiale, le bouton de menu dans la barre de titre donne accès à Accueil, Listes et Paramètres sur téléphone et tablette. Le bouton Retour ferme le menu ouvert.
 
 - Adapter les écrans à la largeur disponible de la fenêtre, en portrait et en paysage. Utiliser les dp pour la disposition, les sp pour le texte et une hauteur de contenu flexible.
